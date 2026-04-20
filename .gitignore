@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Next.js build
+.next/
+out/
+
+# Medusa build
+.medusa/
+dist/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# TypeScript build info
+tsconfig.tsbuildinfo
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Large binary/media files
+*.blend
+*.blend1
+*.psd
+*.obj
+*.mtl
+bilder/
+kodiprint-medusa/FÖRENINGAR/
+office_tritan_bottle_nohandle_precise_obj/
+office_tritan_bottle_obj/
+threejs/
+
+# Storefront (separate repo)
+kodiprint-storefront/
+
+# Misc data files
+orders.csv
+orders.numbers
