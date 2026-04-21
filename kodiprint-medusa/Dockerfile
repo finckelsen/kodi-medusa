@@ -1,20 +1,14 @@
-FROM node:22-slim AS builder
+FROM node:22-slim
 
 WORKDIR /app
 
 COPY package.json package-lock.json ./
 
-RUN npm install
+RUN npm ci --omit=dev
 
 COPY . ./
 
 RUN npm run build
-
-FROM node:22-slim
-
-WORKDIR /app
-
-COPY --from=builder /app /app
 
 EXPOSE 9000
 
