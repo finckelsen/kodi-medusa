@@ -1,0 +1,8 @@
+node_modules
+.medusa
+dist
+.env
+.env.local
+FÖRENINGAR
+static
+.git
