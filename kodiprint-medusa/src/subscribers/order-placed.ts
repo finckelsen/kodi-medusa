@@ -63,7 +63,7 @@ export default async function orderPlacedHandler({
     total: Number(total),
     kickback_amount: kickbackAmount,
     status: "completed",
-    created_at: order.created_at?.toISOString?.() || new Date().toISOString(),
+    created_at: order.created_at instanceof Date ? order.created_at.toISOString() : (order.created_at || new Date().toISOString()),
     customer_email: (order.metadata as Record<string, any>)?.customer_email || null,
     line_items: lineItems,
     source: "medusa",

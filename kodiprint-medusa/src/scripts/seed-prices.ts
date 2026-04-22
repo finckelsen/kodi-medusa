@@ -76,7 +76,7 @@ export default async function seedPrices({ container }: ExecArgs) {
             logger.info(`  Added SEK price ${priceAmount} öre to existing price set`);
           } else if (sekPrice.amount !== priceAmount) {
             // Update the price if it's different
-            await pricingService.updatePrices([
+            await (pricingService as any).updatePrices([
               {
                 id: sekPrice.id,
                 amount: priceAmount,

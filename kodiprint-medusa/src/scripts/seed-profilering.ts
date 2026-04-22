@@ -62,7 +62,7 @@ export default async function seedProfilering({ container }: ExecArgs) {
         ],
       },
     });
-    categoryResult = [...categoryResult, ...newCategories];
+    categoryResult = [...categoryResult, ...newCategories] as any;
   }
 
   const profileringCategory = categoryResult.find(

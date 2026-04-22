@@ -157,7 +157,7 @@ class DhlFulfillmentService extends AbstractFulfillmentProviderService {
             : DEFAULT_BUSINESS_BASE_AMOUNT)
     )
     const freeShippingThreshold = Number(optionData.free_shipping_threshold || 0)
-    const cart = context.cart
+    const cart = context.cart as any
     const itemTotal =
       typeof cart?.item_total === "number"
         ? cart.item_total

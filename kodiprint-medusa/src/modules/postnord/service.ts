@@ -95,7 +95,7 @@ class PostNordFulfillmentService extends AbstractFulfillmentProviderService {
     context: CalculateShippingOptionPriceDTO["context"]
   ): Promise<CalculatedShippingOptionPrice> {
     const freeShippingThreshold = getFreeShippingThreshold()
-    const cart = context.cart
+    const cart = context.cart as any
     const itemTotal = typeof cart?.item_total === "number"
       ? cart.item_total
       : Array.isArray(cart?.items)

@@ -31,7 +31,7 @@ export default async function setForeningPasswords({ container }: ExecArgs) {
       // First, delete any existing auth identities for this email
       const existingIdentities = await authModuleService.listAuthIdentities({
         provider_identities: {
-          entity_id: forening.email,
+          entity_id: forening.email!,
         },
       })
 
@@ -65,7 +65,7 @@ export default async function setForeningPasswords({ container }: ExecArgs) {
       // The token contains the auth_identity_id, we need to update app_metadata
       const newIdentities = await authModuleService.listAuthIdentities({
         provider_identities: {
-          entity_id: forening.email,
+          entity_id: forening.email!,
         },
       })
 

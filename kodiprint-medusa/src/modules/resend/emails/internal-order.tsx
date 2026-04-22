@@ -109,7 +109,7 @@ function InternalOrderEmailComponent({ order }: InternalOrderEmailProps) {
     <Tailwind>
       <Html className="font-sans bg-gray-100">
         <Head />
-        <Preview>Ny order #{order.display_id} - Kodiprint intern</Preview>
+        <Preview>{`Ny order #${order.display_id} - Kodiprint intern`}</Preview>
         <Body className="bg-white my-10 mx-auto w-full max-w-2xl">
           {/* Header */}
           <Section className="bg-[#0a1628] text-white px-6 py-4">

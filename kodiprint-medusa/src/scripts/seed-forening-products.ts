@@ -114,7 +114,7 @@ export default async function seedForeningProducts({ container }: ExecArgs) {
 
       try {
         // Create the product without variants first
-        const product = await productService.createProducts({
+        const product = await (productService as any).createProducts({
           title: productTitle,
           handle: productHandle,
           description: baseProduct.description,
@@ -146,7 +146,7 @@ export default async function seedForeningProducts({ container }: ExecArgs) {
           if (fs.existsSync(imagePath)) {
             try {
               const fileContent = fs.readFileSync(imagePath);
-              const uploaded = await fileService.createFiles({
+              const uploaded = await (fileService as any).createFiles({
                 filename: `${productHandle}-${imageFilename}`,
                 mimeType: "image/jpeg",
                 content: fileContent,
