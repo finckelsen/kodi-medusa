@@ -2,18 +2,18 @@ FROM node:22-slim
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+# Copy only package.json (no lockfile — forces npm to resolve
+# all optional platform-specific deps correctly for linux)
+COPY package.json ./
 
-# Install ALL dependencies (dev needed for medusa build)
-# Force install SWC linux-x64 binary (npm skips optional platform deps in Docker)
-RUN npm install && npm install @swc/core-linux-x64-gnu
+RUN npm install
 
 COPY . ./
 
-# Build Medusa (needs typescript, swc, vite from devDeps)
+# Build Medusa
 RUN npm run build
 
-# Remove dev dependencies after build to slim down image
+# Remove dev dependencies after build
 RUN npm prune --omit=dev
 
 EXPOSE 9000
