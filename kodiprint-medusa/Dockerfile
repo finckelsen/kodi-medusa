@@ -11,10 +11,13 @@ RUN npm install
 COPY . ./
 
 # Build Medusa (backend + admin dashboard)
-RUN npm run build
+RUN npm run build 2>&1 | tail -30
 
-# Verify admin was built
-RUN ls .medusa/server/public/admin/index.html || echo "WARNING: Admin build missing"
+# Debug: show what was built
+RUN echo "=== Build output ===" && \
+    ls -la .medusa/ 2>/dev/null || echo "No .medusa dir" && \
+    ls -la .medusa/server/public/admin/ 2>/dev/null || echo "No admin build found" && \
+    find .medusa -name "index.html" 2>/dev/null || echo "No index.html anywhere in .medusa"
 
 # Remove dev dependencies after build
 RUN npm prune --omit=dev
