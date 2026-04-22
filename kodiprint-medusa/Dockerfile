@@ -5,7 +5,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # Install ALL dependencies (dev needed for medusa build)
-RUN npm install
+# Force install SWC linux-x64 binary (npm skips optional platform deps in Docker)
+RUN npm install && npm install @swc/core-linux-x64-gnu
 
 COPY . ./
 
