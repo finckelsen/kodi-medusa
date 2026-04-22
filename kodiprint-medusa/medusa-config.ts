@@ -106,9 +106,6 @@ modules.push({
 })
 
 module.exports = defineConfig({
-  admin: {
-    disable: true,
-  },
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
     http: {
