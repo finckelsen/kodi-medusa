@@ -13,6 +13,10 @@ COPY . ./
 # Build Medusa (backend + admin dashboard)
 RUN npm run build
 
+# medusa build puts admin in .medusa/server/public/admin/
+# but medusa start looks for it in ./public/admin/
+RUN cp -r .medusa/server/public/admin ./public/admin
+
 EXPOSE 9000
 
 CMD ["sh", "-c", "./node_modules/.bin/medusa db:migrate 2>&1 && ./node_modules/.bin/medusa start"]
