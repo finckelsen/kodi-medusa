@@ -13,15 +13,6 @@ COPY . ./
 # Build Medusa (backend + admin dashboard)
 RUN npm run build
 
-# Save the build output before pruning
-RUN cp -r .medusa /tmp/medusa-build
-
-# Remove dev dependencies
-RUN npm prune --omit=dev
-
-# Restore build output (prune can destroy it)
-RUN rm -rf .medusa && cp -r /tmp/medusa-build .medusa && rm -rf /tmp/medusa-build
-
 EXPOSE 9000
 
 CMD ["sh", "-c", "./node_modules/.bin/medusa db:migrate 2>&1 && ./node_modules/.bin/medusa start"]
