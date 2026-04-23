@@ -10,18 +10,17 @@ RUN npm install
 
 COPY . ./
 
-# Build Medusa backend
+# Build Medusa (backend + admin dashboard)
 RUN npm run build
 
-# Ensure admin build exists (use pre-built copy if medusa build didn't produce it)
-RUN if [ ! -f .medusa/server/public/admin/index.html ]; then \
-      echo "Admin not built by medusa build, using pre-built copy"; \
-    else \
-      echo "Admin build OK"; \
-    fi
+# Save the build output before pruning
+RUN cp -r .medusa /tmp/medusa-build
 
-# Remove dev dependencies after build
+# Remove dev dependencies
 RUN npm prune --omit=dev
+
+# Restore build output (prune can destroy it)
+RUN rm -rf .medusa && cp -r /tmp/medusa-build .medusa && rm -rf /tmp/medusa-build
 
 EXPOSE 9000
 
