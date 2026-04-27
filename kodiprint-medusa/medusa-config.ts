@@ -98,6 +98,32 @@ if (process.env.DHL_API_KEY) {
   })
 }
 
+// File storage: use S3/R2 if credentials provided, otherwise local
+if (process.env.R2_ACCESS_KEY_ID) {
+  modules.push({
+    resolve: "@medusajs/medusa/file",
+    options: {
+      providers: [
+        {
+          resolve: "@medusajs/medusa/file-s3",
+          id: "s3",
+          options: {
+            file_url: process.env.R2_PUBLIC_BASE_URL,
+            access_key_id: process.env.R2_ACCESS_KEY_ID,
+            secret_access_key: process.env.R2_SECRET_ACCESS_KEY,
+            region: process.env.R2_REGION || "auto",
+            bucket: process.env.R2_BUCKET,
+            endpoint: process.env.R2_ENDPOINT,
+            additional_client_config: {
+              forcePathStyle: true,
+            },
+          },
+        },
+      ],
+    },
+  })
+}
+
 modules.push({
   resolve: "@medusajs/medusa/fulfillment",
   options: {
